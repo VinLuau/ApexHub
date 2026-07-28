@@ -13,7 +13,7 @@ local LocalPlayer = Players.LocalPlayer
 
 -- 윈도우 생성
 local Window = Library:CreateWindow({
-    Title = 'Apex Hub V1 | Universal',
+    Title = 'Apex Hub | Linoria',
     Center = true,
     AutoShow = true,
     TabPadding = 8,
@@ -23,17 +23,17 @@ local Window = Library:CreateWindow({
 -- 탭 생성
 local Tabs = {
     Main = Window:AddTab('Main'),
-    Aimbot = Window:AddTab('Aim Bot'),
+    Aimbot = Window:AddTab('Aimbot'),
     ESP = Window:AddTab('ESP'),
-    ['UI 설정'] = Window:AddTab('UI Setting'),
+    ['UI setting'] = Window:AddTab('UI close'),
 }
 
 -- [1. 메인 탭 그룹박스]
-local LeftMain = Tabs.Main:AddLeftGroupbox('move and upgrade body')
-local RightMain = Tabs.Main:AddRightGroupbox('teleport')
+local LeftMain = Tabs.Main:AddLeftGroupbox('Move and upgrade body')
+local RightMain = Tabs.Main:AddRightGroupbox('Teleport')
 
 LeftMain:AddSlider('WalkSpeedSlider', {
-    Text = 'Walk speed',
+    Text = 'Walkspeed',
     Default = 16,
     Min = 16,
     Max = 1000,
@@ -60,7 +60,7 @@ LeftMain:AddSlider('JumpPowerSlider', {
 })
 
 LeftMain:AddToggle('InfiniteJumpToggle', {
-    Text = 'Infinite jump',
+    Text = 'Infinite Jump',
     Default = false,
 })
 
@@ -99,11 +99,11 @@ RightMain:AddInput('TPInput', {
     Default = '0, 0',
     Numeric = false,
     Finished = false,
-    Text = 'Teleport Coordinates (X, Y)',
+    Text = 'Teleport coordinates (X, Y)',
     Tooltip = 'Please separate by commas (,) when entering (ex., 100, 200)',
 })
 
-RightMain:AddButton('Teleport to Coordinates', function()
+RightMain:AddButton('Teleport to coordinates', function()
     local text = Options.TPInput.Value
     local x, y = text:match("([^,]+),%s*(.+)")
     if x and y then
@@ -119,11 +119,11 @@ RightMain:AddButton('Now coordinates save', function()
     local char = LocalPlayer.Character
     if char and char:FindFirstChild("HumanoidRootPart") then
         SavedCoords = char.HumanoidRootPart.CFrame
-        Library:Notify('Now Coordinates saved')
+        Library:Notify('The current coordinates have been saved.')
     end
 end)
 
-RightMain:AddButton('Teleport to the saved Coordinates', function()
+RightMain:AddButton('Teleport to saved coordinates.', function()
     if SavedCoords then
         local char = LocalPlayer.Character
         if char and char:FindFirstChild("HumanoidRootPart") then
@@ -131,16 +131,16 @@ RightMain:AddButton('Teleport to the saved Coordinates', function()
             Library:Notify('Teleported to the saved coordinates.')
         end
     else
-        Library:Notify('There isn't any saved coordinates.')
+        Library:Notify('No saved coordinates!')
     end
 end)
 
 -- [2. 에임봇 탭 그룹박스]
-local LeftAim = Tabs.Aimbot:AddLeftGroupbox('Aimpot setting')
-local RightAim = Tabs.Aimbot:AddRightGroupbox('Target and filter')
+local LeftAim = Tabs.Aimbot:AddLeftGroupbox('Aimbot setting')
+local RightAim = Tabs.Aimbot:AddRightGroupbox('Target or filter')
 
 LeftAim:AddToggle('AimbotToggle', {
-    Text = 'Toggle aimbot',
+    Text = 'On aimbot',
     Default = false,
 })
 
@@ -170,11 +170,11 @@ LeftAim:AddToggle('WallCheckToggle', {
 RightAim:AddDropdown('AimPartDropdown', {
     Values = {"Head", "HumanoidRootPart", "UpperTorso", "LowerTorso", "LeftHand", "RightHand", "LeftFoot", "RightFoot"},
     Default = 1,
-    Text = 'Target part',
+    Text = 'Targeting Part',
 })
 
 -- [3. ESP 탭 그룹박스]
-local LeftEsp = Tabs.ESP:AddLeftGroupbox('Visual hack (ESP)')
+local LeftEsp = Tabs.ESP:AddLeftGroupbox('ESP')
 
 LeftEsp:AddToggle('ESP_Highlight', { Text = 'Highlight', Default = false })
 LeftEsp:AddToggle('ESP_Name', { Text = 'Name Tag', Default = false })
@@ -182,8 +182,8 @@ LeftEsp:AddToggle('ESP_Health', { Text = 'Health Bar', Default = false })
 LeftEsp:AddToggle('ESP_Box', { Text = 'Box', Default = false })
 
 -- [4. UI 설정 탭]
-local MenuGroup = Tabs['UI Setting']:AddLeftGroupbox('메뉴 제어')
-MenuGroup:AddButton('Close', function()
+local MenuGroup = Tabs['UI setting']:AddLeftGroupbox('Menu control')
+MenuGroup:AddButton('Close menu panel', function()
     Library:Toggle()
 end)
 
